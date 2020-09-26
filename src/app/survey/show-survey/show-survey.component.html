@@ -1,0 +1,43 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false" (click)="add()">
+    Add Survey
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{Modaltitle}}</h5>
+                <button type="button" (Click)="close()" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-survey [survey]="survey" *ngIf="Activate"></app-add-edit-survey>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead class="">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let survey of Surveys">
+            <td>{{survey.id}}</td>
+            <td>{{survey.title}}</td>
+            <td>{{survey.description}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false" (click)="edit(survey)">Edit</button>
+                <button type="button" class="btn btn-light mr-1" (click)="delete(survey.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
