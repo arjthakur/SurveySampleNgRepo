@@ -7,9 +7,13 @@ import { SurveyComponent } from './survey/survey.component';
 import { ShowSurveyComponent } from './survey/show-survey/show-survey.component';
 import { AddEditSurveyComponent } from './survey/add-edit-survey/add-edit-survey.component';
 import { SurveyServiceService } from './survey-service.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesComponent } from './pages/pages.component';
+import { LoginComponent } from './login/login.component';
+import { LoginServiceService } from './login-service.service';
+import { HomeComponent } from './home/home.component';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,8 @@ import { PagesComponent } from './pages/pages.component';
     ShowSurveyComponent,
     AddEditSurveyComponent,
     PagesComponent,
+    LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,15 @@ import { PagesComponent } from './pages/pages.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [SurveyServiceService],
+  providers: [
+    SurveyServiceService,
+    LoginServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -35,14 +35,24 @@ export class ShowSurveyComponent implements OnInit {
       this.get();
     });
   }
-  close() {
-    this.Activate = false;
-    this.get();
-    debugger;
-  }
   get(): any {
-    this.surveyServiceService.get().subscribe((x) => {
-      this.Surveys = x;
-    });
+    this.surveyServiceService.get().subscribe(
+      (x) => {
+        this.Surveys = x;
+      },
+      (x) => {
+        alert(x.message);
+        console.log(x);
+      }
+    );
+  }
+  notified($event): any {
+    debugger;
+    if ($event) {
+      this.get();
+      let ele: HTMLElement = document.getElementById('closepp');
+      ele.click();
+      this.Activate = false;
+    }
   }
 }

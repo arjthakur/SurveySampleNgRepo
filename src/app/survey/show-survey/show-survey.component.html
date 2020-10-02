@@ -9,12 +9,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">{{Modaltitle}}</h5>
-                <button type="button" (Click)="close()" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="closepp" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <app-add-edit-survey [survey]="survey" *ngIf="Activate"></app-add-edit-survey>
+                <app-add-edit-survey (notify)='notified($event)' [survey]="survey" *ngIf="Activate"></app-add-edit-survey>
             </div>
         </div>
     </div>

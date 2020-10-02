@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SurveyServiceService } from '../../survey-service.service';
 @Component({
   selector: 'app-add-edit-survey',
@@ -7,6 +7,7 @@ import { SurveyServiceService } from '../../survey-service.service';
 })
 export class AddEditSurveyComponent implements OnInit {
   constructor(private surveyservice: SurveyServiceService) {}
+  @Output() notify = new EventEmitter();
 
   @Input() survey: any;
   id: number;
@@ -25,6 +26,7 @@ export class AddEditSurveyComponent implements OnInit {
     };
     this.surveyservice.post(model).subscribe((x) => {
       alert('Record added!');
+      this.notify.emit(true);
     });
   }
   update() {
@@ -35,6 +37,7 @@ export class AddEditSurveyComponent implements OnInit {
     };
     this.surveyservice.put(model).subscribe((x) => {
       alert('Record updated!');
+      this.notify.emit(true);
     });
   }
 }
